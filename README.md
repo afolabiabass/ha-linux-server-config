@@ -1,8 +1,8 @@
 # ha-linux-server-config
 A project for the requirements of Udacity FSND
 
-#### Step A: The Lightsail instance
-* Create a Lightsail instance in AWS
+1. Step A: The Lightsail instance
+*Create a Lightsail instance in AWS
 * Click on the “Services” link in the top navbar,
 * Under the “Compute section, select Lightsail,
 * Inside the Lightsail page, click on “Create instance” page,
