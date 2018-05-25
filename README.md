@@ -123,8 +123,8 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 
 	```  
 	<VirtualHost *:80>  
-		ServerName 52.24.125.52  
-		ServerAdmin qiaowei8993@gmail.com  
+		ServerName 35.178.90.82 
+		ServerAdmin [ha@mail.com](mail.com  
 		WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi  
 		<Directory /var/www/FlaskApp/FlaskApp/>  
 			Order allow,deny  
@@ -146,15 +146,17 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 * Create a wsgi file for the app
 * The wsgi file sits inside the parent FlaskApp directory: $ sudo nano /var/www/FlaskApp/flaskapp.wsgi
 * Paste the text below inside the flaskapp.wsgi file:
-#!/usr/bin/python
-import sys
-import logging
-logging.basicConfig(stream=sys.stderr)
-sys.path.insert(0,"/var/www/FlaskApp/")
 
-from FlaskApp import app as application
-application.secret_key = 'Add your secret key'
+	```  
+	#!/usr/bin/python  
+	import sys  
+	import logging  
+	logging.basicConfig(stream=sys.stderr)  
+	sys.path.insert(0,"/var/www/FlaskApp/")  
 
+	from FlaskApp import app as application  
+	application.secret_key = 'Add your secret key'  
+	```
 #### Change the secret key credentials for Google sign in
 
 * Get the Host Name for the public IP address (e.g., 35.178.90.82)  from site:  [http://www.hcidata.info/host2ip.htm](www.hcidata.info)
