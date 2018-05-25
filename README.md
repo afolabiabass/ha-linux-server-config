@@ -78,7 +78,7 @@ A project for the requirements of Udacity FSND
 #### 1. Clone the catalog app (properties app in this example) 
 * Create a new folder under the /www directory: $ sudo mkdir FlaskApp
 * cd into the new FlaskApp directory: $ cd /var/www/FlaskApp
-* Clone you catalog app with the new name FlaskApp: $ sudo git clone https://github.com/hicham-alaoui/properties-catalog.git FlaskApp. The path to the catalog app should be:/var/www/FlaskApp/FlaskApp. 
+* Clone you catalog app with the new name FlaskApp: $ sudo git clone[ https://github.com/hicham-alaoui/properties-catalog.git](http://github.com) FlaskApp. The path to the catalog app should be:/var/www/FlaskApp/FlaskApp. 
 #### 2. Add the packages used in your app to enable them inside the new environment
 * Install pip: $ sudo apt-get install python-pip.
 * Install Flask and the rest of the packages
@@ -121,7 +121,7 @@ A project for the requirements of Udacity FSND
 * Paste the text below inside the FlaskApp.conf file:
 <VirtualHost *:80>
 	ServerName 35.178.90.82
-	ServerAdmin ha@mail.com
+	ServerAdmin [ha@mail.com](mail.com)
 	WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
 	<Directory /var/www/FlaskApp/FlaskApp/>
 		Order allow,deny
@@ -153,7 +153,7 @@ application.secret_key = 'Add your secret key'
 
 #### Change the secret key credentials for Google sign in
 
-* Get the Host Name for the public IP address (e.g., 35.178.90.82)  from site:  http://www.hcidata.info/host2ip.htm
+* Get the Host Name for the public IP address (e.g., 35.178.90.82)  from site:  [http://www.hcidata.info/host2ip.htm](www.hcidata.info)
 * Update the oauth2 credentials for the app in the Google Console:
 
 
