@@ -48,7 +48,7 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 
 
 #### 2. Create a keypair for grader user
-* Ssh into the grader user account: $ ssh grader@35.178.90.82 -p 2200 (plus password if any)
+* ssh into the grader user account: $ ssh grader@35.178.90.82 -p 2200 (plus password if any)
 * Create a directory .ssh: $ sudo mkdir .ssh
 * Create a file with the name authorized_keys inside the .ssh directory: $ sudo touch /.ssh/authorized_keys.
 * Change the permission for the .ssh folder: $ sudo chmod 700 .ssh
@@ -60,6 +60,7 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 * Open the authorized_keys file created for the grader user: $ sudo nano /.sh/authorized_keys
 * Paste the content
 * Reopen the sshd_config file (sudo nano /etc/ssh/sshd_config) and change password authentication from “yes” to “no”.
+* Restart the ssh service: $ sudo service ssh restart 
 
 ===========================================================================
 
@@ -70,7 +71,7 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 
 #### 2. Add mod-wsgi for python environment
 * use the command: $ sudo apt-get install libapache2-mod-wsgi python-dev
- * Install git 
+* Install git 
 * Install git: $ sudo apt-get install git
 
 ===========================================================================
