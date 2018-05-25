@@ -1,5 +1,6 @@
 # ha-linux-server-config
 A project for the requirements of Udacity FSND
+The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazonaws.com](amazonaws.com) while at the review stage.
 
 ### Step A: The Lightsail instance  
 #### 1. Create a Lightsail instance in AWS
@@ -14,7 +15,7 @@ A project for the requirements of Udacity FSND
 #### 2. Download the Lightsail default private key to local device
 * In the instances page click on the instance name to open the settings page.
 * Scroll all the way down to the bottom of the page and click on the blue “Account page” link
-*Click on “download” at the bottom of the page, name and save the file on your local device then ssh into your Lightsail server : sudo ssh ubuntu@35.178.90.82 -i lighsail_key.pem -p 2200 )  
+* Click on “download” at the bottom of the page, name and save the file on your local device then ssh into your Lightsail server : sudo ssh ubuntu@35.178.90.82 -i lighsail_key.pem -p 2200 )  
 #### 3. Add ports 2200/tcp and 123/udp
 * On your instance page click on the “Networking” tab,
 * Under “Firewall” section, click on “+Add another” at the bottom of the ports list,
@@ -118,24 +119,27 @@ A project for the requirements of Udacity FSND
 ### Final step: Fire the app to the web
 #### 1. Create a new Virtual Host
 * Create the FlaskApp.conf file: $ sudo nano /etc/apache2/sites-available/FlaskApp.conf
-* Paste the text below inside the FlaskApp.conf file:
-<VirtualHost *:80>
-	ServerName 35.178.90.82
-	ServerAdmin [ha@mail.com](mail.com)
-	WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
-	<Directory /var/www/FlaskApp/FlaskApp/>
-		Order allow,deny
-		Allow from all
-	</Directory>
-	Alias /static /var/www/FlaskApp/FlaskApp/static
-	<Directory /var/www/FlaskApp/FlaskApp/static/>
-		Order allow,deny
-		Allow from all
-	</Directory>
-	ErrorLog ${APACHE_LOG_DIR}/error.log
-	LogLevel warn
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
+* Paste the text below inside the FlaskApp.conf file:  
+
+	```  
+	<VirtualHost *:80>  
+		ServerName 52.24.125.52  
+		ServerAdmin qiaowei8993@gmail.com  
+		WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi  
+		<Directory /var/www/FlaskApp/FlaskApp/>  
+			Order allow,deny  
+			Allow from all  
+		</Directory>  
+		Alias /static /var/www/FlaskApp/FlaskApp/static  
+		<Directory /var/www/FlaskApp/FlaskApp/static/>  
+			Order allow,deny  
+			Allow from all  
+		</Directory>  
+		ErrorLog ${APACHE_LOG_DIR}/error.log  
+		LogLevel warn  
+		CustomLog ${APACHE_LOG_DIR}/access.log combined  
+	</VirtualHost>  
+	```  
 
 * Disable the default virtual host:  $ sudo a2disste 000-default.conf
 * Enable the new virtual host: $ sudo a2ensite FlaskApp.conf
@@ -162,3 +166,7 @@ application.secret_key = 'Add your secret key'
 * Restart the Apache server: $ sudo service apache2 restart
 * Use the Host Name [http://ec2-35-178-90-82.eu-west-2.compute.amazonaws.com]( amazonaws.com) (not just the public IP) to launch the app.
 
+### References:
+* [https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps](https://www.digitalocean.com/)
+* [https://github.com/kongling893/Linux-Server-Configuration-UDACITY](https://github.com)
+* [https://stackoverflow.com/](https://stackoverflow.com)
