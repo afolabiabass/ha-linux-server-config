@@ -1,5 +1,5 @@
 # ha-linux-server-config
-A project for the requirements of Udacity FSND
+A project for the requirements of Udacity FSND  
 The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazonaws.com](amazonaws.com) while at the review stage.
 
 ### Step A: The Lightsail instance  
