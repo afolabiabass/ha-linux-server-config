@@ -143,8 +143,7 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 
 * Disable the default virtual host:  $ sudo a2disste 000-default.conf
 * Enable the new virtual host: $ sudo a2ensite FlaskApp.conf
-* Create a wsgi file for the app
-* The wsgi file sits inside the parent FlaskApp directory: $ sudo nano /var/www/FlaskApp/flaskapp.wsgi
+* Create a wsgi file for the app. The wsgi file sits inside the parent FlaskApp directory: $ sudo nano /var/www/FlaskApp/flaskapp.wsgi
 * Paste the text below inside the flaskapp.wsgi file:
 
 	```  
@@ -166,7 +165,7 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 * Update the client_secrets.json file with the new “Authorised Javascript origins” and “Authorised redirect URIs” details
 ![](img/secret_json.png)
 * Restart the Apache server: $ sudo service apache2 restart
-* Use the Host Name [http://ec2-35-178-90-82.eu-west-2.compute.amazonaws.com]( amazonaws.com) (not just the public IP) to launch the app.
+* Use the Host Name [http://ec2-35-178-90-82.eu-west-2.compute.amazonaws.com]( amazonaws.com) (not just the public IP) in the browser to launch the app.
 
 ### References:
 * [https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps](https://www.digitalocean.com/)
