@@ -36,6 +36,39 @@ A project for the requirements of Udacity FSND
 * Allow existing port 22: $ sudo ufw allow 80/tcp
 * All UDP port 123: $ sudo ufw allow 123/udp
 * Check if the ufw is active. If not, do so using the command: $ sudo ufw enable
+========================================================================================================================================
+
+### Step B: The “grader” user
+#### 1. Create the grader user
+* Switch role to root using the command: sudo su -
+* Create the grader user: sudo adduser grader
+* Assign sudo status to grader: $ sudo nano /etc/sudoers.d/grader, and type grader ALL=(ALL:ALL) ALL.
+
+
+#### 2. Create a keypair for grader user
+* Ssh into the grader user account: $ ssh grader@35.178.90.82 -p 2200 (plus password if any)
+* Create a directory .ssh: $ sudo mkdir .ssh
+* Create a file with the name authorized_keys inside the .ssh directory: $ sudo touch /.ssh/authorized_keys.
+* Change the permission for the .ssh folder: $ sudo chmod 700 .ssh
+* Change the permissions for the authorized_keys file: $ sudo chmod 644 /.ssh/authorized_keys
+* Open a new gitbash window on your device and type the command: $ ssh-keygen
+* Enter file in which to save the key (/c/Users/Hicham/.ssh/id_rsa): c/Users/Hicham/.ssh/authorized_keys
+* The command will create two files in the specified directory. Open the one with the extension PUB using the command: $ sudo cat ~/.ssh/authorized_keys.pub
+* Copy the content
+* Open the authorized_keys file created for the grader user: $ sudo nano /.sh/authorized_keys
+* Paste the content
+* Reopen the sshd_config file (sudo nano /etc/ssh/sshd_config) and change password authentication from “yes” to “no”.
+========================================================================================
+
+### Step C: Apache2, mod-wsgi, and Git
+#### 1. Install Apache2
+* Connect to your instance with the grader account: $ ssh grader@35.178.90.82 -p 2200 -i ~/.ssh/authorized_keys
+* Install apache2: $ sudo apt-get install apache2.
+
+#### 2. Add mod-wsgi for python environment
+* use the command: $ sudo apt-get install libapache2-mod-wsgi python-dev
+ * Install git 
+* Install git: $ sudo apt-get install git
 
 
 
