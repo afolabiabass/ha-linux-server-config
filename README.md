@@ -36,7 +36,8 @@ A project for the requirements of Udacity FSND
 * Allow existing port 22: $ sudo ufw allow 80/tcp
 * All UDP port 123: $ sudo ufw allow 123/udp
 * Check if the ufw is active. If not, do so using the command: $ sudo ufw enable
-==========================================================================================
+
+===========================================================================
 
 ### Step B: The “grader” user
 #### 1. Create the grader user
@@ -58,7 +59,8 @@ A project for the requirements of Udacity FSND
 * Open the authorized_keys file created for the grader user: $ sudo nano /.sh/authorized_keys
 * Paste the content
 * Reopen the sshd_config file (sudo nano /etc/ssh/sshd_config) and change password authentication from “yes” to “no”.
-========================================================================================
+
+===========================================================================
 
 ### Step C: Apache2, mod-wsgi, and Git
 #### 1. Install Apache2
@@ -70,6 +72,93 @@ A project for the requirements of Udacity FSND
  * Install git 
 * Install git: $ sudo apt-get install git
 
+===========================================================================
+
+### Step D: Clone the app into Apache2
+#### 1. Clone the catalog app (properties app in this example) 
+* Create a new folder under the /www directory: $ sudo mkdir FlaskApp
+* cd into the new FlaskApp directory: $ cd /var/www/FlaskApp
+* Clone you catalog app with the new name FlaskApp: $ sudo git clone https://github.com/hicham-alaoui/properties-catalog.git FlaskApp. The path to the catalog app should be:/var/www/FlaskApp/FlaskApp. 
+#### 2. Add the packages used in your app to enable them inside the new environment
+* Install pip: $ sudo apt-get install python-pip.
+* Install Flask and the rest of the packages
+*$ sudo apt-get install python-pip
+* $ sudo pip install Flask
+* $ sudo pip install httplib2
+* $ sudo pip install sqlalchemy
+* $ sudo pip install oauth2client
+* $ sudo pip install --upgrade oauth2client
+* $ sudo pip install sqlalchemy
+* $ sudo pip install sqlalchemy_utils
+* $ sudo pip install requests
+8* $ sudo pip install render_template
+* $ sudo pip install redirect
+* $ sudo pip install psslib
+#### 3. ename and edit the application python file
+* Rename the cloned application python file from its current name(e.g., project.py or catalog.py)  to __init__py
+* In the __init__.py edit the client_secrects.json file path to : /var/www/FlaskApp/FlaskApp/client_secrets.json 
+
+#### 4. Set up the database  
+* Install PostgreSQL : $ sudo apt-get install postgresql
+* Check if no remote connections are allowed:  sudo nano /etc/postgresql/9.5/main/pg_hba.conf
+* Login as user "postgres": $ sudo su - postgres
+* Get into postgreSQL shell: psql
+* Create a new database named catalog and create a new user named catalog in postgreSQL shell: postgres=# CREATE DATABASE catalog;
+* postgres=# CREATE USER catalog
+* Set a password for user catalog: postgres=# ALTER ROLE catalog WITH PASSWORD 'password'
+* Give user "catalog" permission to "catalog" application database: postgres=# GRANT ALL PRIVILEGES ON DATABASE catalog TO catalog
+* Quit postgreSQL: postgres=# \q
+* Exit from user "postgres": exit
+* Change the path to the database in the __init__.py and the database_setup.py (properties_db.py in this project) files to : __ create_engine('postgresql://catalog:password@localhost/catalog')__
+* Install psycopg2: sudo apt-get -qqy install postgresql python-psycopg2
+* Create database schema: sudo python database_setup.py
+
+===========================================================================
+
+### Final step: Fire the app to the web
+#### 1. Create a new Virtual Host
+* Create the FlaskApp.conf file: $ sudo nano /etc/apache2/sites-available/FlaskApp.conf
+* Paste the text below inside the FlaskApp.conf file:
+<VirtualHost *:80>
+	ServerName 35.178.90.82
+	ServerAdmin ha@mail.com
+	WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
+	<Directory /var/www/FlaskApp/FlaskApp/>
+		Order allow,deny
+		Allow from all
+	</Directory>
+	Alias /static /var/www/FlaskApp/FlaskApp/static
+	<Directory /var/www/FlaskApp/FlaskApp/static/>
+		Order allow,deny
+		Allow from all
+	</Directory>
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	LogLevel warn
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+* Disable the default virtual host:  $ sudo a2disste 000-default.conf
+* Enable the new virtual host: $ sudo a2ensite FlaskApp.conf
+* Create a wsgi file for the app
+* The wsgi file sits inside the parent FlaskApp directory: $ sudo nano /var/www/FlaskApp/flaskapp.wsgi
+* Paste the text below inside the flaskapp.wsgi file:
+#!/usr/bin/python
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/FlaskApp/")
+
+from FlaskApp import app as application
+application.secret_key = 'Add your secret key'
+
+#### Change the secret key credentials for Google sign in
+
+* Get the Host Name for the public IP address (e.g., 35.178.90.82)  from site:  http://www.hcidata.info/host2ip.htm
+* Update the oauth2 credentials for the app in the Google Console:
 
 
+
+* Update the client_secrets file with the new “Authorised Javascript origins” and “Authorised redirect URIs” details
+* Restart the Apache server: $ sudo service apache2 restart
+* Use the Host Name [http://ec2-35-178-90-82.eu-west-2.compute.amazonaws.com]( amazonaws.com) (not just the public IP) to launch the app.
 
