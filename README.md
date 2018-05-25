@@ -36,7 +36,7 @@ A project for the requirements of Udacity FSND
 * Allow existing port 22: $ sudo ufw allow 80/tcp
 * All UDP port 123: $ sudo ufw allow 123/udp
 * Check if the ufw is active. If not, do so using the command: $ sudo ufw enable
-========================================================================================================================================
+======================================================================================================
 
 ### Step B: The “grader” user
 #### 1. Create the grader user
