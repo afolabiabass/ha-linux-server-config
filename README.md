@@ -163,7 +163,8 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 ![](img/hci-data.png)
 * Update the oauth2 credentials for the app in the Google Console:
 ![](img/client_secrets.png)
-* Update the client_secrets file with the new “Authorised Javascript origins” and “Authorised redirect URIs” details
+* Update the client_secrets.json file with the new “Authorised Javascript origins” and “Authorised redirect URIs” details
+![](img/secret_json.png)
 * Restart the Apache server: $ sudo service apache2 restart
 * Use the Host Name [http://ec2-35-178-90-82.eu-west-2.compute.amazonaws.com]( amazonaws.com) (not just the public IP) to launch the app.
 
