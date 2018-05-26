@@ -115,7 +115,7 @@ The above list is not exhaustive and varies from one project to the other
 * Give user "catalog" permission to "catalog" application database: postgres=# GRANT ALL PRIVILEGES ON DATABASE catalog TO catalog
 * Quit postgreSQL: postgres=# \q
 * Exit from user "postgres": exit
-* Change the path to the database in the __init__.py and the database_setup.py (properties_db.py in this project) files to : __ create_engine('postgresql://catalog:password@localhost/catalog')__
+* Change the path to the database in the `__init__.py` and the database_setup.py (properties_db.py in this project) files to : __ create_engine('postgresql://catalog:password@localhost/catalog')__
 * Install psycopg2: sudo apt-get -qqy install postgresql python-psycopg2
 * Create database schema: sudo python database_setup.py
 
