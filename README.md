@@ -172,7 +172,7 @@ The above list is not exhaustive and varies from one project to the other
 
 #### 4. Restart the Apache server
 * Start Apache2 service with the command: $ sudo service apache2 restart
-* Use the Host Name [http://ec2-35-178-90-82.eu-west-2.compute.amazonaws.com]( amazonaws.com) <font color="red">(not just the public IP)</font> in the browser to launch the app.
+* Use the Host Name [http://ec2-35-178-90-82.eu-west-2.compute.amazonaws.com]( amazonaws.com) <font color="red">`(not just the public IP)`</font> in the browser to launch the app.
 
 ### References:
 * [https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps](https://www.digitalocean.com/)
