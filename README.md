@@ -30,13 +30,13 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 * Change ssh port from 22 to 2200
 * Open the sshd_config file: $ sudo nano /etc/ssh/ssdh_config
 * Change the ssh port from 22 to 2200
-* Restart the ssh service: $ sudo service ssh restart
 
 #### 5. Update ufw ports and status
 * Allow the new port 2200: $ sudo ufw allow 2200/tcp
 * Allow existing port 22: $ sudo ufw allow 80/tcp
 * All UDP port 123: $ sudo ufw allow 123/udp
 * Check if the ufw is active. If not, do so using the command: $ sudo ufw enable
+* Restart the ssh service: $ sudo service ssh restart
 
 #### 6. Configure the local timezone to UTC
 * Configure the time zone: $ sudo dpkg-reconfigure tzdata
