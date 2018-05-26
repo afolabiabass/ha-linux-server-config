@@ -97,7 +97,7 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 * $ sudo pip install sqlalchemy_utils
 * $ sudo pip install requests
 * $ sudo pip install render_template
-* $ sudo pip install redirect
+* $ sudo pip install redirect  
 The above list is not exhaustive and varies from one project to the other
 
 #### 3. Rename and edit the application python file
