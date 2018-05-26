@@ -74,7 +74,7 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 
 #### 2. Add mod-wsgi for python environment
 * use the command: $ sudo apt-get install libapache2-mod-wsgi python-dev
-* Install git 
+#### 3. Install git 
 * Install git: $ sudo apt-get install git
 
 ===========================================================================
