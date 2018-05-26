@@ -38,6 +38,9 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 * All UDP port 123: $ sudo ufw allow 123/udp
 * Check if the ufw is active. If not, do so using the command: $ sudo ufw enable
 
+#### 6. Configure the local timezone to UTC
+* Configure the time zone: $ sudo dpkg-reconfigure tzdata
+
 ===========================================================================
 
 ### Step B: The “grader” user
@@ -93,10 +96,11 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 * $ sudo pip install sqlalchemy
 * $ sudo pip install sqlalchemy_utils
 * $ sudo pip install requests
-8* $ sudo pip install render_template
+* $ sudo pip install render_template
 * $ sudo pip install redirect
-* $ sudo pip install psslib
-#### 3. ename and edit the application python file
+The above list is not exhaustive and varies from one project to the other
+
+#### 3. Rename and edit the application python file
 * Rename the cloned application python file from its current name(e.g., project.py or catalog.py)  to __init__py
 * In the __init__.py edit the client_secrects.json file path to : /var/www/FlaskApp/FlaskApp/client_secrets.json 
 
@@ -142,9 +146,10 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 	</VirtualHost>  
 	```  
 
-* Disable the default virtual host:  $ sudo a2disste 000-default.conf
+* Disable the default virtual host:  $ sudo a2dissite 000-default.conf
 * Enable the new virtual host: $ sudo a2ensite FlaskApp.conf
-* Create a wsgi file for the app. The wsgi file sits inside the parent FlaskApp directory: $ sudo nano /var/www/FlaskApp/flaskapp.wsgi
+#### 2. Create a wsgi file for the app. 
+* The wsgi file sits inside the parent FlaskApp directory: $ sudo nano /var/www/FlaskApp/flaskapp.wsgi
 * Paste the text below inside the flaskapp.wsgi file:
 
 	```  
@@ -157,16 +162,17 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 	from FlaskApp import app as application  
 	application.secret_key = 'Add your secret key'  
 	```
-#### Change the secret key credentials for Google sign in
-
+#### 3. Change the secret key credentials for Google sign in
 * Get the Host Name for the public IP address (e.g., 35.178.90.82)  from site:  [http://www.hcidata.info/host2ip.htm](www.hcidata.info)
 ![](img/hci-data.png)
 * Update the oauth2 credentials for the app in the Google Console:
 ![](img/client_secrets.png)
 * Update the client_secrets.json file with the new “Authorised Javascript origins” and “Authorised redirect URIs” details
 ![](img/secret_json.png)
-* Restart the Apache server: $ sudo service apache2 restart
-* Use the Host Name [http://ec2-35-178-90-82.eu-west-2.compute.amazonaws.com]( amazonaws.com) (not just the public IP) in the browser to launch the app.
+
+#### 4. Restart the Apache server
+* Start Apache2 service with the command: $ sudo service apache2 restart
+* Use the Host Name [http://ec2-35-178-90-82.eu-west-2.compute.amazonaws.com]( amazonaws.com) <font color="red">(not just the public IP)</font> in the browser to launch the app.
 
 ### References:
 * [https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps](https://www.digitalocean.com/)
