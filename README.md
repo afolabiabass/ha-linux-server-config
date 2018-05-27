@@ -15,7 +15,7 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 #### 2. Download the Lightsail default private key to local device
 * In the instances page click on the instance name to open the settings page.
 * Scroll all the way down to the bottom of the page and click on the blue “Account page” link
-* Click on “download” at the bottom of the page, name and save the file on your local device then ssh into your Lightsail server : sudo ssh ubuntu@35.178.90.82 -i lighsail_key.pem -p 2200 )  
+* Click on “download” at the bottom of the page, name and save the file on your local device then ssh into your Lightsail server : sudo ssh ubuntu@35.178.90.82 -i lightsail_key.pem)  
 #### 3. Add ports 2200/tcp and 123/udp
 * On your instance page click on the “Networking” tab,
 * Under “Firewall” section, click on “+Add another” at the bottom of the ports list,
@@ -27,18 +27,20 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 * Update server packages using the command: $ sudo apt-get update
 * Upgrade the packages: $ sudo apt-get upgrade
 * You can also install the user identifier package “finger” : $ sudo apt-get install finger
-* Change ssh port from 22 to 2200
+#### 5. Change ssh port from 22 to 2200
 * Open the sshd_config file: $ sudo nano /etc/ssh/ssdh_config
 * Change the ssh port from 22 to 2200
+* Save the change
+* Restart the ssh service: $ sudo sevice ssh restart 
 
-#### 5. Update ufw ports and status
+#### 6. Update ufw ports and status
 * Allow the new port 2200: $ sudo ufw allow 2200/tcp
 * Allow existing port 22: $ sudo ufw allow 80/tcp
 * All UDP port 123: $ sudo ufw allow 123/udp
 * Check if the ufw is active. If not, do so using the command: $ sudo ufw enable
 * Restart the ssh service: $ sudo service ssh restart
 
-#### 6. Configure the local timezone to UTC
+#### 7. Configure the local timezone to UTC
 * Configure the time zone: $ sudo dpkg-reconfigure tzdata
 
 ===========================================================================
@@ -57,10 +59,10 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 * Change the permission for the .ssh folder: $ sudo chmod 700 .ssh
 * Change the permissions for the authorized_keys file: $ sudo chmod 644 /.ssh/authorized_keys
 * Open a new gitbash window on your device and type the command: $ ssh-keygen
-* Enter file in which to save the key (/c/Users/Hicham/.ssh/id_rsa): c/Users/Hicham/.ssh/authorized_keys
+* Create the file in which to save the key (/c/Users/Hicham/.ssh/id_rsa): c/Users/Hicham/.ssh/authorized_keys
 * The command will create two files in the specified directory. Open the one with the extension PUB using the command: $ sudo cat ~/.ssh/authorized_keys.pub
 * Copy the content
-* Open the authorized_keys file created for the grader user: $ sudo nano /.sh/authorized_keys
+* Open the authorized_keys file created for the grader user: $ sudo nano /.ssh/authorized_keys
 * Paste the content
 * Reopen the sshd_config file (sudo nano /etc/ssh/sshd_config) and change password authentication from “yes” to “no”.
 * Restart the ssh service: $ sudo service ssh restart 
@@ -83,7 +85,8 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 #### 1. Clone the catalog app (properties app in this example) 
 * Create a new folder under the /www directory: $ sudo mkdir FlaskApp
 * cd into the new FlaskApp directory: $ cd /var/www/FlaskApp
-* Clone you catalog app with the new name FlaskApp: $ sudo git clone[ https://github.com/hicham-alaoui/properties-catalog.git](http://github.com) FlaskApp. The path to the catalog app should be:/var/www/FlaskApp/FlaskApp. 
+* Clone you catalog app with the new name "FlaskApp": $ sudo git clone[ https://github.com/hicham-alaoui/properties-catalog.git](http://github.com) FlaskApp. The path to the catalog app should be:/var/www/FlaskApp/FlaskApp. 
+
 #### 2. Add the packages used in your app to enable them inside the new environment
 * Install pip: $ sudo apt-get install python-pip.
 * Install Flask and the rest of the packages
@@ -109,13 +112,13 @@ The above list is not exhaustive and varies from one project to the other
 * Check if no remote connections are allowed:  sudo nano /etc/postgresql/9.5/main/pg_hba.conf
 * Login as user "postgres": $ sudo su - postgres
 * Get into postgreSQL shell: psql
-* Create a new database named catalog and create a new user named catalog in postgreSQL shell: postgres=# CREATE DATABASE catalog;
+* Create a new database named "catalog" and create a new user named "catalog" in postgreSQL shell: postgres=# CREATE DATABASE catalog;
 * postgres=# CREATE USER catalog
 * Set a password for user catalog: postgres=# ALTER ROLE catalog WITH PASSWORD 'password'
 * Give user "catalog" permission to "catalog" application database: postgres=# GRANT ALL PRIVILEGES ON DATABASE catalog TO catalog
 * Quit postgreSQL: postgres=# \q
 * Exit from user "postgres": exit
-* Change the path to the database in the `__init__.py` and the database_setup.py (properties_db.py in this project) files to : __ create_engine('postgresql://catalog:password@localhost/catalog')__
+* Change the path to the database in the `__init__.py` and the database_setup.py (properties_db.py in this project) files to : create_engine('postgresql://catalog:password@localhost/catalog')
 * Install psycopg2: sudo apt-get -qqy install postgresql python-psycopg2
 * Create database schema: sudo python database_setup.py
 
@@ -129,7 +132,7 @@ The above list is not exhaustive and varies from one project to the other
 	```  
 	<VirtualHost *:80>  
 		ServerName 35.178.90.82 
-		ServerAdmin [ha@mail.com](mail.com  
+		ServerAdmin [ha@mail.com](mail.com)  
 		WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi  
 		<Directory /var/www/FlaskApp/FlaskApp/>  
 			Order allow,deny  
@@ -145,9 +148,11 @@ The above list is not exhaustive and varies from one project to the other
 		CustomLog ${APACHE_LOG_DIR}/access.log combined  
 	</VirtualHost>  
 	```  
+	*Remember to replace edit the ServerName and ServiceAdmin details 
 
 * Disable the default virtual host:  $ sudo a2dissite 000-default.conf
 * Enable the new virtual host: $ sudo a2ensite FlaskApp.conf
+
 #### 2. Create a wsgi file for the app. 
 * The wsgi file sits inside the parent FlaskApp directory: $ sudo nano /var/www/FlaskApp/flaskapp.wsgi
 * Paste the text below inside the flaskapp.wsgi file:
@@ -172,7 +177,9 @@ The above list is not exhaustive and varies from one project to the other
 
 #### 4. Restart the Apache server
 * Start Apache2 service with the command: $ sudo service apache2 restart
-* Use the Host Name [http://ec2-35-178-90-82.eu-west-2.compute.amazonaws.com]( amazonaws.com) <font color="red">`(not just the public IP e.g., 35.178.90.82)`</font> in the browser to launch the app.
+
+#### 5. Launch the app in the browser
+* Use the Host Name address [http://ec2-35-178-90-82.eu-west-2.compute.amazonaws.com]( amazonaws.com) (not just the public IP e.g., 35.178.90.82).
 
 ### References:
 * [https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps](https://www.digitalocean.com/)
