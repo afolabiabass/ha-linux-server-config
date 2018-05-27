@@ -148,7 +148,7 @@ The above list is not exhaustive and varies from one project to the other
 		CustomLog ${APACHE_LOG_DIR}/access.log combined  
 	</VirtualHost>  
 	```  
-	*Remember to replace edit the ServerName and ServiceAdmin details 
+	*Remember to change the ServerName and ServiceAdmin details to yours. 
 
 * Disable the default virtual host:  $ sudo a2dissite 000-default.conf
 * Enable the new virtual host: $ sudo a2ensite FlaskApp.conf
