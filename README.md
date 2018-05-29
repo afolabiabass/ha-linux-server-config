@@ -26,7 +26,10 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 * Connect to the linux server via either the Lightsail page ssh connect link or local gitbash as explained above. 
 * Update server packages using the command: $ sudo apt-get update
 * Upgrade the packages: $ sudo apt-get upgrade
+* Remove un-used packages: $ sudo apt-get autoremove
+* enable unattended updates: $ sudo apt install unattended-upgrades
 * You can also install the user identifier package “finger” : $ sudo apt-get install finger
+
 #### 5. Change ssh port from 22 to 2200
 * Open the sshd_config file: $ sudo nano /etc/ssh/ssdh_config
 * Change the ssh port from 22 to 2200
@@ -65,6 +68,11 @@ The website can be accesses at: [http://ec2-35-178-90-82.eu-west-2.compute.amazo
 * Open the authorized_keys file created for the grader user: $ sudo nano /.ssh/authorized_keys
 * Paste the content
 * Reopen the sshd_config file (sudo nano /etc/ssh/sshd_config) and change password authentication from “yes” to “no”.
+
+#### 3. Change PermitRootLogin property property
+* Change the PermitRootLogin property to "no" in the sshd_config file: $ sudo /etc/ssh/sshd_config
+
+#### 4. Restart the ssh service
 * Restart the ssh service: $ sudo service ssh restart 
 
 ===========================================================================
